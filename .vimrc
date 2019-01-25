@@ -38,6 +38,8 @@ Plugin 'vim-php/phpctags'
 
 Plugin 'vim-vdebug/vdebug'
 
+Plugin 'mustache/vim-mustache-handlebars'
+
 " All of the plugins must be added before the following line
 call vundle#end()
 
@@ -98,10 +100,12 @@ let g:ctrlp_by_filename = 1
 " cursor
 highlight Cursor guifg=white guibg=black
 
-" Set JS identation
+
+" --- IDENTATION --- "
 autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
+
 
 
 " --- FOLDS --- "
@@ -171,4 +175,4 @@ set foldenable
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_enable_folding=1
 let g:vimwiki_folding='expr'
-let g:vim_markdown_folding_level=2
+let g:vim_markdown_set_header_folding_level=3
