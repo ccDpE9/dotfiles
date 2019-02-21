@@ -23,7 +23,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 
 " jsx syntax
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
+
 
 Plugin '2072/php-indenting-for-vim'
 
