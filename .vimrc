@@ -41,6 +41,8 @@ Plugin 'vim-vdebug/vdebug'
 
 Plugin 'mustache/vim-mustache-handlebars'
 
+Plugin 'jparise/vim-graphql'
+
 " All of the plugins must be added before the following line
 call vundle#end()
 
