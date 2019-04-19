@@ -174,7 +174,7 @@ set foldenable
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let wiki = {}
 let wiki.path = '~/vimwiki'
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'php': 'php', 'xml': 'xml'}
 let wiki.syntah = 'markdown'
 let wiki.ext = '.md'
 let g:vimwiki_list = [wiki]
