@@ -25,15 +25,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 
-
 Plugin '2072/php-indenting-for-vim'
 
 Plugin 'phpactor/phpactor'
 
 " Plugin 'swekaj/php-foldexpr.vim'
 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'godlygeek/tabular'
+" Plugin 'plasticboy/vim-markdown'
 
 Plugin 'vim-php/phpctags'
 
@@ -169,13 +168,14 @@ vmap <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
 " Extract method from selection
 vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
 
-" --- VIMWIKI --- "
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
-" --- MARKDOWN --- "
+" --- VIMWIKI --- "
 set foldenable
-"let g:markdown_folding=1
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-let g:markdown_enable_folding=1
+let wiki = {}
+let wiki.path = '~/vimwiki'
+let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+let wiki.syntah = 'markdown'
+let wiki.ext = '.md'
+let g:vimwiki_list = [wiki]
 let g:vimwiki_folding='expr'
-let g:vim_markdown_set_header_folding_level=3

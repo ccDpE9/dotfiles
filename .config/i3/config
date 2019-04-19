@@ -197,11 +197,10 @@ gaps outer 4
 # --- Startup --- #
 # --------------- #
 
-exec setxkbmap dvorak
-exec setxkbmap -option caps:swapescape
 exec --no-startup-id wal -R
-exec compton --inactive-dim 0.5 -i 0.7 -c --active-opacity 1.0
-exec feh --bg-scale ~/Downloads/SpBfUZi.jpg
+exec compton -i 0.7 -c --active-opacity 1.0
+exec setxkbmap dvorak -option caps:swapescape
+exec feh --bg-scale ~/Downloads/669639.png
 
 # Remove window border
 # new_window 1pixel
