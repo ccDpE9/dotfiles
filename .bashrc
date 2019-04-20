@@ -22,6 +22,7 @@ EDITOR=/usr/bin/nano
 # --- ALIASES --- #
 
 alias projects="cd ~/Desktop/projects"
+alias pwn="cd ~/Desktop/projects/c_scripts/pwnablekr"
 
 alias wiki="vim ~/vimwiki/index.md"
 alias diary="vim ~/vimwiki/diary/diary.md"
@@ -29,3 +30,9 @@ alias diary="vim ~/vimwiki/diary/diary.md"
 export QT_QPA_PLATFORMTHEME=gtk2
 
 alias php-xdebug="exec /home/comm/Desktop/scripts/php-xdebug.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+alias vpn="sudo openvpn /etc/openvpn/client/protonvpn.conf"
