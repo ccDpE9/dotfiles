@@ -17,4 +17,4 @@ firefox -no-remote -ProfileManager
 ### Addons ###
 
 1. Stylus:
-  1. Github: [https://userstyles.org/styles/168511/github-ice-dark-updated]
+  1. Github: https://userstyles.org/styles/168511/github-ice-dark-updated
