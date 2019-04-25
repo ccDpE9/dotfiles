@@ -12,9 +12,7 @@ firefox -no-remote -ProfileManager
 
 2. Set it to default, and note it's directory name
 
-3. Follow the instructions at:
-
-[https://github.com/Zortax/Vimix-Midnight-Firefox]
+3. Follow the instructions at: https://github.com/Zortax/Vimix-Midnight-Firefox
 
 ### Addons ###
 
