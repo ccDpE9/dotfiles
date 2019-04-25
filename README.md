@@ -1,6 +1,8 @@
-# Firefox
+# Dotfiles
 
-## Theme ##
+## Firefox
+
+### Theme ###
 
 1. Create a new profile using:
 
@@ -12,9 +14,9 @@ firefox -no-remote -ProfileManager
 
 3. Follow the instructions at:
 
-https://github.com/Zortax/Vimix-Midnight-Firefox
+[https://github.com/Zortax/Vimix-Midnight-Firefox]
 
-## Addons ##
+### Addons ###
 
 1. Stylus:
-  1. Github: https://userstyles.org/styles/168511/github-ice-dark-updated
+  1. Github: [https://userstyles.org/styles/168511/github-ice-dark-updated]
