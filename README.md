@@ -20,4 +20,4 @@ firefox -no-remote -ProfileManager
 1. [Stylus](https://addons.mozilla.org/en-US/firefox/addon/styl-us/)
   * [Github](https://userstyles.org/styles/168511/github-ice-dark-updated)
   * [Arch](https://userstyles.org/styles/89090/another-dark-arch-linux-theme)
-  * [Lastfm}(https://userstyles.org/styles/121779/rsbk-last-fm)
+  * [Lastfm](https://userstyles.org/styles/121779/rsbk-last-fm)
