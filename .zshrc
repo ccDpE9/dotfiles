@@ -25,4 +25,5 @@ PROMPT='[ %n | ${PWD/#$HOME/~} ] ${vcs_info_msg_0_} > '
 
 # --- Pywal
 
-[[ -f ~/.cache/wal/sequences ]] && (cat ~/.cache/wal/sequences &)
+(cat ~/.cache/wal/sequences &)
+source ~/.cache/wal/colors-tty.sh

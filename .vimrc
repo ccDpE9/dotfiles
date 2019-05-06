@@ -68,7 +68,6 @@ set t_Co=256
 colorscheme wal
 set background=dark
 set guifont=Boxxy:h20
-set spell
 
 " splits
 " moving between splits

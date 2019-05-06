@@ -1,6 +1,14 @@
-! Set depth to make transparency work.
-URxvt*depth: 32
-
 URxvt*scrollBar: false
 URxvt.font: xft:bitstream vera sans mono:size=10:antialias=true
 URxvt.boldFont: xft:bitstream vera sans mono:bold:size=10:antialias=true
+
+URxvt*depth: 32
+URxvt*transparent: true
+URxvt*shading: 30
+
+Xft.autohint: false
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
