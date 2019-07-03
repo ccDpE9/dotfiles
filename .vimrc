@@ -4,44 +4,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
 Plugin 'nvie/vim-flake8'
-
-Plugin 'scrooloose/nerdtree'
-
 Plugin 'vimwiki/vimwiki'
-
 Plugin 'dylanaraps/wal'
-
 Plugin 'alvan/vim-closetag'
-
-Plugin 'mattn/emmet-vim'
-
-Plugin 'jwalton512/vim-blade'
-
-Plugin 'ctrlpvim/ctrlp.vim'
-
-" jsx syntax
 Plugin 'pangloss/vim-javascript'
-Plugin 'maxmellon/vim-jsx-pretty'
-
 Plugin '2072/php-indenting-for-vim'
-
-Plugin 'phpactor/phpactor'
-
-" Plugin 'swekaj/php-foldexpr.vim'
-
-" Plugin 'godlygeek/tabular'
-" Plugin 'plasticboy/vim-markdown'
-
-Plugin 'vim-php/phpctags'
-
 Plugin 'vim-vdebug/vdebug'
-
-Plugin 'mustache/vim-mustache-handlebars'
-
 Plugin 'jparise/vim-graphql'
-
 " All of the plugins must be added before the following line
 call vundle#end()
 
@@ -69,48 +39,25 @@ colorscheme wal
 set background=dark
 set guifont=Boxxy:h20
 
-" splits
-" moving between splits
+
+" - SPLITS
+" -- settings
+set splitbelow
+set splitright
+" -- commands
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" split opennig
-set splitbelow
-set splitright
-
-" NERDTree size
-:let g:NERDTreeWinSize=20
-
-" Open new split panes to the right and bottom
-set splitright
-
-" Auto resize Vim splits to active split
-set winwidth=104
-set winheight=5
-set winminheight=5
-set winheight=999
-
-" Changes default mapping and the default command to invoke CtlP
-let g:ctrlp_map = '<c-p>'
-let g:ctllp_cmd = 'CtrlP'
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-" If set to 1, searches by filename, as oposed to full path
-" Can be toggled on/off by pressing <c-d> inside the prompt
-let g:ctrlp_by_filename = 1
-
-" cursor
-highlight Cursor guifg=white guibg=black
 
 
-" --- IDENTATION --- "
+" - IDENTATION 
 autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
 
 
-
-" --- FOLDS --- "
+" - FOLDS
 nnoremap <space> za
 " edit fold style
 let s:middot='.'
@@ -133,49 +80,58 @@ set foldtext=MyFoldText()
 let g:phpfold_text_right_lines=1
 
 
-" --- FUZZY FINDER --- "
-map ; :Files<C-P>
-
-
-" --- PHPACTOR --- "
-
-let mapleader=","
-
-" Include use statement
-nmap <Leader>u :call phpactor#UseAdd()<CR>
-
-" Invoke the context menu
-nmap <Leader>mm :call phpactor#ContextMenu()<CR>
-
-" Invoke the navigation menu
-nmap <Leader>nn :call phpactor#Navigate()<CR>
-
-" Goto definition of class or class member under the cursor
-nmap <Leader>o :call phpactor#GotoDefinition()<CR>
-
-" Transform the classes in the current file
-nmap <Leader>tt :call phpactor#Transform()<CR>
-
-" Generate a new class (replacing the current file)
-nmap <Leader>cc :call phpactor#ClassNew()<CR>
-
-" Extract expression (normal mode)
-nmap <silent><Leader>ee :call phpactor#ExtractExpression(v:false)<CR>
-
-" Extract expression from selection
-vmap <silent><Leader>ee :<C-U>call phpactor#ExtractExpression(v:true)<CR>
-
-" Extract method from selection
-vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
-
-
-" --- VIMWIKI --- "
-set foldenable
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-let wiki = {}
-let wiki.path = '~/vimwiki'
-let wiki.nested_syntaxes = {'python': 'python', 'c++': 'cpp', 'php': 'php', 'xml': 'xml', 'sh': 'sh'}
-let wiki.syntax = 'markdown'
-let wiki.ext = '.md'
-let g:vimwiki_list = [wiki]
+" - VIMWIKI
+" -- configuration
+let g:vimwiki_list = [{"path": "~/vimwiki", "syntax": "markdown", "ext": ".md"}]
 let g:vimwiki_folding='expr'
+let g:vimwiki_global_ext = 0
+
+
+" - VDEBUG
+let g:vdebug_options = {'server': '127.0.0.1'}
+let g:vdebug_options = {'port': '9001'}
+
+
+" - BUFFER "
+" -- configuration
+" -- commands
+nnoremap <silent> bo :badd!<CR>
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+
+" - MAPPINGS
+" -- Find file in current directory and edit it.
+function! Find(name)
+  let l:list=system("find . -name '".a:name."' | perl -ne 'print \"$.\\t$_\"'")
+" replace above line with below one for gvim on windows
+" let l:list=system("find . -name ".a:name." | perl -ne \"print qq{$.\\t$_}\"")
+  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
+  if l:num < 1
+    echo "'".a:name."' not found"
+    return
+  endif
+  if l:num != 1
+    echo l:list
+    let l:input=input("Which ? (CR=nothing)\n")
+    if strlen(l:input)==0
+      return
+    endif
+    if strlen(substitute(l:input, "[0-9]", "", "g"))>0
+      echo "Not a number"
+      return
+    endif
+    if l:input<1 || l:input>l:num
+      echo "Out of range"
+      return
+    endif
+    let l:line=matchstr("\n".l:list, "\n".l:input."\t[^\n]*")
+  else
+    let l:line=l:list
+  endif
+  let l:line=substitute(l:line, "^[^\t]*\t./", "", "")
+  execute ":e ".l:line
+endfunction
+command! -nargs=1 Find :call Find("<args>")
