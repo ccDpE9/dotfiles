@@ -1,17 +1,18 @@
-set nocompatible
+  set nocompatible
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'vimwiki/vimwiki'
-Plugin 'dylanaraps/wal'
-Plugin 'alvan/vim-closetag'
-Plugin 'pangloss/vim-javascript'
-Plugin '2072/php-indenting-for-vim'
+  Plugin 'gmarik/Vundle.vim'
+  Plugin 'nvie/vim-flake8'
+  Plugin 'vimwiki/vimwiki'
+  Plugin 'dylanaraps/wal'
+  Plugin 'alvan/vim-closetag'
+  Plugin 'pangloss/vim-javascript'
+  Plugin '2072/php-indenting-for-vim'
 Plugin 'vim-vdebug/vdebug'
 Plugin 'jparise/vim-graphql'
+Plugin 'MaxMEllon/vim-jsx-pretty'
 " All of the plugins must be added before the following line
 call vundle#end()
 
