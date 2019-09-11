@@ -18,7 +18,7 @@ EDITOR=/usr/bin/nano
 
 alias projects="cd ~/Desktop/projects"
 alias wiki="vim ~/vimwiki/index.md"
-alias diary=diary
+alias diary="vim ~/vimwiki/diary/index."
 
 function diary() {
   DATE="$(date +"%m-%d-%y")"

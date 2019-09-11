@@ -1,18 +1,23 @@
-  set nocompatible
+set nocompatible
 
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-  Plugin 'gmarik/Vundle.vim'
-  Plugin 'nvie/vim-flake8'
-  Plugin 'vimwiki/vimwiki'
-  Plugin 'dylanaraps/wal'
-  Plugin 'alvan/vim-closetag'
-  Plugin 'pangloss/vim-javascript'
-  Plugin '2072/php-indenting-for-vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'vimwiki/vimwiki'
+Plugin 'dylanaraps/wal'
+Plugin 'alvan/vim-closetag'
+Plugin 'pangloss/vim-javascript'
+Plugin '2072/php-indenting-for-vim'
 Plugin 'vim-vdebug/vdebug'
 Plugin 'jparise/vim-graphql'
 Plugin 'MaxMEllon/vim-jsx-pretty'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'junegunn/goyo.vim'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 " All of the plugins must be added before the following line
 call vundle#end()
 
@@ -63,19 +68,19 @@ nnoremap <space> za
 " edit fold style
 let s:middot='.'
 function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 let g:phpfold_text_right_lines=1
@@ -86,6 +91,10 @@ let g:phpfold_text_right_lines=1
 let g:vimwiki_list = [{"path": "~/vimwiki", "syntax": "markdown", "ext": ".md"}]
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext = 0
+
+
+" - PANDOC
+let g:pandoc#syntax#conceal#use = 1
 
 
 " - VDEBUG
@@ -104,11 +113,14 @@ nnoremap <silent> ]B :blast<CR>
 
 
 " - MAPPINGS
+:map <space> viw
+" :nnoremap -di
+
 " -- Find file in current directory and edit it.
 function! Find(name)
   let l:list=system("find . -name '".a:name."' | perl -ne 'print \"$.\\t$_\"'")
-" replace above line with below one for gvim on windows
-" let l:list=system("find . -name ".a:name." | perl -ne \"print qq{$.\\t$_}\"")
+  " replace above line with below one for gvim on windows
+  " let l:list=system("find . -name ".a:name." | perl -ne \"print qq{$.\\t$_}\"")
   let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
   if l:num < 1
     echo "'".a:name."' not found"
