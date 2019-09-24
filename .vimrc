@@ -18,6 +18,8 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'junegunn/goyo.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
 " All of the plugins must be added before the following line
 call vundle#end()
 
@@ -111,11 +113,6 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
-
-" - MAPPINGS
-:map <space> viw
-" :nnoremap -di
-
 " -- Find file in current directory and edit it.
 function! Find(name)
   let l:list=system("find . -name '".a:name."' | perl -ne 'print \"$.\\t$_\"'")
@@ -148,3 +145,7 @@ function! Find(name)
   execute ":e ".l:line
 endfunction
 command! -nargs=1 Find :call Find("<args>")
+
+function Note_today()
+  date=$(date + "%(%Y-%m-%d)T\n")
+endfunction
