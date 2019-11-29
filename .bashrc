@@ -48,6 +48,6 @@ export NODE_PATH=/usr/lib/node_modules:$NODE_PATH
 
 function download_websites() {
   while read i;
-  do wkhtmltopdf --javascript-delay 10 "$i" "$(echo "$i" | sed -e 's/htps\?:\/\///' -e 's/\//-/g' ).pdf";
+  do wkhtmltopdf --javascript-delay 10 "$i" "$(echo "$i" | sed -e 's/https\?:\/\///' -e 's/\//-/g' ).pdf";
   done < url-list.txt
 }
