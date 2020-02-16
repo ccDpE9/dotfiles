@@ -8,18 +8,13 @@ Plugin 'nvie/vim-flake8'
 Plugin 'vimwiki/vimwiki'
 Plugin 'dylanaraps/wal'
 Plugin 'alvan/vim-closetag'
-Plugin 'pangloss/vim-javascript'
-Plugin '2072/php-indenting-for-vim'
 Plugin 'vim-vdebug/vdebug'
-Plugin 'jparise/vim-graphql'
-Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'junegunn/goyo.vim'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'ianks/vim-tsx'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'dense-analysis/ale'
 " All of the plugins must be added before the following line
 call vundle#end()
 
@@ -29,7 +24,7 @@ endif
 
 let python_highlight_all=1
 
-" basic
+" - Basic
 syntax on
 set encoding=utf-8
 set showmode
@@ -39,15 +34,17 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 set smartindent
-set fileformat=unix 
+set fileformat=unix
 set number
 set wrap
 set t_Co=256
 colorscheme wal
 set background=dark
 set guifont=Boxxy:h20
-set thesaurus+=/home/comm/Documents/mthesaur.txt
-
+set thesaurus+=/home/comm/Documents/thesaurus.txt
+set hlsearch
+set backupext=.bak
+set textwidth=72
 
 " - SPLITS
 " -- settings
@@ -59,35 +56,28 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-
-" - IDENTATION 
+" - IDENTATION
 autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
 
-
 " - FOLDS
 nnoremap <space> za
-" edit fold style
-let s:middot='.'
-function! MyFoldText() " {{{
-  let line = getline(v:foldstart)
+set foldmethod=syntax
+set foldlevelstart=1
+let php_folding=1
+set foldtext=FoldText()
 
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
-
-  " expand tabs into spaces
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
-
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-  return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-let g:phpfold_text_right_lines=1
-
+function! FoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
 
 " - VIMWIKI
 " -- configuration
@@ -95,17 +85,14 @@ let g:vimwiki_list = [{"path": "~/vimwiki", "syntax": "markdown", "ext": ".md"}]
 let g:vimwiki_folding='expr'
 let g:vimwiki_global_ext = 0
 
-
 " - PANDOC
 let g:pandoc#syntax#conceal#use = 1
-
 
 " - VDEBUG
 let g:vdebug_options = {'server': '127.0.0.1'}
 let g:vdebug_options = {'port': '9001'}
 
-
-" - BUFFER "
+" - BUFFER
 " -- configuration
 " -- commands
 nnoremap <silent> bo :badd!<CR>
@@ -113,6 +100,21 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
+
+" - Linters
+" -- ALE
+let g:ale_sign_error = '>>'
+let g:ale_sign_warrning = '--'
+" -- Prettier
+" --- configuration
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\   'typescript': ['eslint', 'prettier']
+\}
+let g:ale_fix_on_save = 1
+" --- commands
+nmap <F7> <Plug>(ale_fix)
 
 " -- Find file in current directory and edit it.
 function! Find(name)
