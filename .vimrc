@@ -4,16 +4,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'nvie/vim-flake8'
 Plugin 'vimwiki/vimwiki'
 Plugin 'dylanaraps/wal'
-Plugin 'alvan/vim-closetag'
 Plugin 'vim-vdebug/vdebug'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'dense-analysis/ale'
 " All of the plugins must be added before the following line
 call vundle#end()
@@ -45,6 +42,12 @@ set thesaurus+=/home/comm/Documents/thesaurus.txt
 set hlsearch
 set backupext=.bak
 set textwidth=72
+
+" - Clipboard
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 
 " - SPLITS
 " -- settings
@@ -115,40 +118,3 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 " --- commands
 nmap <F7> <Plug>(ale_fix)
-
-" -- Find file in current directory and edit it.
-function! Find(name)
-  let l:list=system("find . -name '".a:name."' | perl -ne 'print \"$.\\t$_\"'")
-  " replace above line with below one for gvim on windows
-  " let l:list=system("find . -name ".a:name." | perl -ne \"print qq{$.\\t$_}\"")
-  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
-  if l:num < 1
-    echo "'".a:name."' not found"
-    return
-  endif
-  if l:num != 1
-    echo l:list
-    let l:input=input("Which ? (CR=nothing)\n")
-    if strlen(l:input)==0
-      return
-    endif
-    if strlen(substitute(l:input, "[0-9]", "", "g"))>0
-      echo "Not a number"
-      return
-    endif
-    if l:input<1 || l:input>l:num
-      echo "Out of range"
-      return
-    endif
-    let l:line=matchstr("\n".l:list, "\n".l:input."\t[^\n]*")
-  else
-    let l:line=l:list
-  endif
-  let l:line=substitute(l:line, "^[^\t]*\t./", "", "")
-  execute ":e ".l:line
-endfunction
-command! -nargs=1 Find :call Find("<args>")
-
-function Note_today()
-  date=$(date + "%(%Y-%m-%d)T\n")
-endfunction
