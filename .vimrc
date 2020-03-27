@@ -56,18 +56,8 @@ autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
 
-" - VIMWIKI
-" -- configuration
-let g:vimwiki_list = [{"path": "~/vimwiki", "syntax": "markdown", "ext": ".md"}]
-let g:vimwiki_folding='expr'
-let g:vimwiki_global_ext = 0
-
 " - PANDOC
 let g:pandoc#syntax#conceal#use = 1
-
-" - VDEBUG
-let g:vdebug_options = {'server': '127.0.0.1'}
-let g:vdebug_options = {'port': '9001'}
 
 " - BUFFER
 " -- configuration
