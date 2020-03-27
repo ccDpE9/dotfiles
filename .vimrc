@@ -4,15 +4,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'vimwiki/vimwiki'
-Plugin 'dylanaraps/wal'
-Plugin 'vim-vdebug/vdebug'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'dense-analysis/ale'
-" All of the plugins must be added before the following line
+
 call vundle#end()
 
 if has("autocmd")
@@ -35,7 +28,6 @@ set fileformat=unix
 set number
 set wrap
 set t_Co=256
-colorscheme wal
 set background=dark
 set guifont=Boxxy:h20
 set thesaurus+=/home/comm/Documents/thesaurus.txt
