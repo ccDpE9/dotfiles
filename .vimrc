@@ -56,24 +56,6 @@ autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
 
-" - FOLDS
-nnoremap <space> za
-set foldmethod=syntax
-set foldlevelstart=1
-let php_folding=1
-set foldtext=FoldText()
-
-function! FoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-
 " - VIMWIKI
 " -- configuration
 let g:vimwiki_list = [{"path": "~/vimwiki", "syntax": "markdown", "ext": ".md"}]
