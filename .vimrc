@@ -32,7 +32,6 @@ set guifont=Boxxy:h20
 set thesaurus+=/home/comm/Documents/thesaurus.txt
 set hlsearch
 set backupext=.bak
-set textwidth=72
 
 " - Clipboard
 noremap <Leader>y "*y
