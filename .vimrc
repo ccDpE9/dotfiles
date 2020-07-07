@@ -24,7 +24,6 @@ set softtabstop=2
 set autoindent
 set smartindent
 set fileformat=unix
-set number
 set wrap
 set t_Co=256
 set background=dark
