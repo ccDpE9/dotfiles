@@ -3,7 +3,7 @@ set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'dense-analysis/ale'
+" PLUGINS
 
 call vundle#end()
 
@@ -43,9 +43,6 @@ autocmd FileType javascript setlocal ts=2 sw=2 sts=0 expandtab
 autocmd FileType php setlocal ts=4 sw=4 sts=0 expandtab
 autocmd FileType blade setlocal ts=4 sw=4 sts=0 expandtab
 
-" - PANDOC
-let g:pandoc#syntax#conceal#use = 1
-
 " - BUFFER
 " -- configuration
 " -- commands
@@ -55,17 +52,5 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
-" - Linters
-" -- ALE
-let g:ale_sign_error = '>>'
-let g:ale_sign_warrning = '--'
-" -- Prettier
-" --- configuration
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
-\   'typescript': ['eslint', 'prettier']
-\}
-let g:ale_fix_on_save = 1
-" --- commands
-nmap <F7> <Plug>(ale_fix)
+" - LINTING
+set errorformat+=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
